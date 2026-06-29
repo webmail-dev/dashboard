@@ -1,0 +1,24 @@
+:root {
+  --vp-c-brand-1: #22c55e;
+  --vp-c-brand-2: #16a34a;
+  --vp-c-brand-3: #15803d;
+}
+
+.mermaid-rendered {
+  overflow-x: auto;
+  padding: 16px;
+  margin: 16px 0;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+}
+
+.mermaid-rendered svg {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.mermaid-error {
+  border-color: var(--vp-c-danger-1);
+}
