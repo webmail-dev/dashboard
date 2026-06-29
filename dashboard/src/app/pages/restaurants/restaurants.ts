@@ -2,29 +2,29 @@ import { AfterViewInit, Component, inject } from '@angular/core';
 import { DalePuesAdminDataService } from '../../core/services/dale-pues-admin-data.service';
 import { ScriptLoaderService } from '../../core/services/script-loader.service';
 import { FooterComponent } from '../../layout/footer/footer';
-import { DalePuesUser } from '../../models/auth.models';
+import { DalePuesBusiness } from '../../models/dale-pues.models';
 
 @Component({
-  selector: 'app-users-page',
+  selector: 'app-restaurants-page',
   imports: [FooterComponent],
-  templateUrl: './users.html',
+  templateUrl: './restaurants.html',
   styles: [':host { display: contents; }']
 })
-export class UsersPageComponent implements AfterViewInit {
+export class RestaurantsPageComponent implements AfterViewInit {
   private readonly adminData = inject(DalePuesAdminDataService);
   private readonly scripts = inject(ScriptLoaderService);
-  users: DalePuesUser[] = [];
+  restaurants: DalePuesBusiness[] = [];
 
   async ngAfterViewInit(): Promise<void> {
-    await this.loadUsers();
-    await this.scripts.loadTemplateScripts(this.scripts.usersPageScripts);
+    await this.loadRestaurants();
+    await this.scripts.loadTemplateScripts(this.scripts.productsPageScripts);
   }
 
-  formatIndex(index: number): string {
-    return `${index + 1}`.padStart(2, '0');
+  formatRating(restaurant: DalePuesBusiness): string {
+    return (restaurant.rating || 0).toFixed(1);
   }
 
-  private async loadUsers(): Promise<void> {
-    this.users = await this.adminData.getUsers();
+  private async loadRestaurants(): Promise<void> {
+    this.restaurants = await this.adminData.getRestaurants();
   }
 }

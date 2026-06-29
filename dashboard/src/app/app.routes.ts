@@ -1,10 +1,17 @@
 import { Routes } from '@angular/router';
+import { adminAuthGuard } from './core/guards/admin-auth.guard';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login').then((m) => m.LoginPageComponent),
+    title: 'Admin Dale Pues'
+  },
+  {
     path: '',
+    canActivate: [adminAuthGuard],
     component: AdminLayoutComponent,
     children: [
       {
@@ -22,6 +29,14 @@ export const routes: Routes = [
       {
         path: 'users',
         loadComponent: () => import('./pages/users/users').then((m) => m.UsersPageComponent)
+      },
+      {
+        path: 'restaurants',
+        loadComponent: () => import('./pages/restaurants/restaurants').then((m) => m.RestaurantsPageComponent)
+      },
+      {
+        path: 'drivers',
+        loadComponent: () => import('./pages/drivers/drivers').then((m) => m.DriversPageComponent)
       }
     ]
   },

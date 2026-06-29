@@ -1,0 +1,27 @@
+<main class="admin-login-page">
+  <section class="admin-login-card">
+    <img src="assets/dashboard/images/logo/1.png" alt="Zomo" class="admin-login-logo">
+    <h1>Panel Dale Pues</h1>
+    <p>Ingresa con una cuenta admin o support.</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <label>
+        Correo
+        <input type="email" formControlName="email" autocomplete="email">
+      </label>
+
+      <label>
+        Contraseña
+        <input type="password" formControlName="password" autocomplete="current-password">
+      </label>
+
+      @if (errorMessage) {
+        <div class="admin-login-error">{{ errorMessage }}</div>
+      }
+
+      <button type="submit" [disabled]="loading">
+        {{ loading ? 'Ingresando...' : 'Ingresar' }}
+      </button>
+    </form>
+  </section>
+</main>

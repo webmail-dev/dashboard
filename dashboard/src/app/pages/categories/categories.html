@@ -30,252 +30,34 @@
                                                 </thead>
 
                                                 <tbody>
+                                                    @for (category of categories; track category.id) {
                                                     <tr>
-                                                        <td>
-                                                            <input class="custom-checkbox" type="checkbox" name="text">
-                                                        </td>
-
+                                                        <td><input class="custom-checkbox" type="checkbox" name="text"></td>
                                                         <td>
                                                             <div class="table-image">
-                                                                <img src="assets/dashboard/images/product/1.png" class="img-fluid"
-                                                                    alt="">
+                                                                <img [src]="category.image || category.icon || 'assets/dashboard/images/product/1.png'" class="img-fluid" [alt]="category.alt || category.name">
                                                             </div>
                                                         </td>
-                                                        <td>Poultry Palace</td>
-
-                                                        <td>26-12-2021</td>
-
-                                                        <td>4</td>
-
+                                                        <td>{{ category.name }}</td>
+                                                        <td>{{ category.created | date: 'dd-MM-yyyy' }}</td>
+                                                        <td>{{ category.type }}</td>
                                                         <td>
-                                                            <ul
-                                                                class="d-flex align-items-center  justify-content-center">
+                                                            <ul class="d-flex align-items-center  justify-content-center">
+                                                                <li><a href="javascript:void(0)"><i class="ri-eye-line"></i></a></li>
+                                                                <li><a href="javascript:void(0)"><i class="ri-pencil-line"></i></a></li>
                                                                 <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <i class="ri-eye-line"></i>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <i class="ri-pencil-line"></i>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                                        data-bs-target="#exampleModalToggle">
+                                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                                                                         <i class="ri-delete-bin-line"></i>
                                                                     </a>
                                                                 </li>
                                                             </ul>
                                                         </td>
                                                     </tr>
+                                                    } @empty {
                                                     <tr>
-                                                        <td>
-                                                            <input class="custom-checkbox" type="checkbox" name="text">
-                                                        </td>
-
-                                                        <td>
-                                                            <div class="table-image">
-                                                                <img src="assets/dashboard/images/product/2.png" class="img-fluid"
-                                                                    alt="">
-                                                            </div>
-                                                        </td>
-                                                        <td>Latte Lounge</td>
-
-                                                        <td>12-1-2021</td>
-
-                                                        <td>2</td>
-
-                                                        <td>
-                                                            <ul
-                                                                class="d-flex align-items-center  justify-content-center">
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <i class="ri-eye-line"></i>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <i class="ri-pencil-line"></i>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                                        data-bs-target="#exampleModalToggle">
-                                                                        <i class="ri-delete-bin-line"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
+                                                        <td colspan="6" class="text-center">No categories found</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <input class="custom-checkbox" type="checkbox" name="text">
-                                                        </td>
-
-                                                        <td>
-                                                            <div class="table-image">
-                                                                <img src="assets/dashboard/images/product/3.png" class="img-fluid"
-                                                                    alt="">
-                                                            </div>
-                                                        </td>
-                                                        <td>Ribeye Junction</td>
-
-                                                        <td>20-6-2021</td>
-
-                                                        <td>6</td>
-
-                                                        <td>
-                                                            <ul
-                                                                class="d-flex align-items-center  justify-content-center">
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <i class="ri-eye-line"></i>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <i class="ri-pencil-line"></i>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                                        data-bs-target="#exampleModalToggle">
-                                                                        <i class="ri-delete-bin-line"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <input class="custom-checkbox" type="checkbox" name="text">
-                                                        </td>
-
-                                                        <td>
-                                                            <div class="table-image">
-                                                                <img src="assets/dashboard/images/product/4.png" class="img-fluid"
-                                                                    alt="">
-                                                            </div>
-                                                        </td>
-                                                        <td>Wing Master</td>
-
-                                                        <td>25-12-2021</td>
-
-                                                        <td>4</td>
-
-                                                        <td>
-                                                            <ul
-                                                                class="d-flex align-items-center  justify-content-center">
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <i class="ri-eye-line"></i>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <i class="ri-pencil-line"></i>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                                        data-bs-target="#exampleModalToggle">
-                                                                        <i class="ri-delete-bin-line"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <input class="custom-checkbox" type="checkbox" name="text">
-                                                        </td>
-
-                                                        <td>
-                                                            <div class="table-image">
-                                                                <img src="assets/dashboard/images/product/5.png" class="img-fluid"
-                                                                    alt="">
-                                                            </div>
-                                                        </td>
-                                                        <td>Mocha Magic Cafe</td>
-
-                                                        <td>20-11-2021</td>
-
-                                                        <td>8</td>
-
-                                                        <td>
-                                                            <ul
-                                                                class="d-flex align-items-center  justify-content-center">
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <i class="ri-eye-line"></i>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <i class="ri-pencil-line"></i>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                                        data-bs-target="#exampleModalToggle">
-                                                                        <i class="ri-delete-bin-line"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <input class="custom-checkbox" type="checkbox" name="text">
-                                                        </td>
-
-                                                        <td>
-                                                            <div class="table-image">
-                                                                <img src="assets/dashboard/images/product/6.png" class="img-fluid"
-                                                                    alt="">
-                                                            </div>
-                                                        </td>
-                                                        <td>The Burger Barn</td>
-
-                                                        <td>22-12-2021</td>
-
-                                                        <td>4</td>
-
-                                                        <td>
-                                                            <ul
-                                                                class="d-flex align-items-center  justify-content-center">
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <i class="ri-eye-line"></i>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)">
-                                                                        <i class="ri-pencil-line"></i>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                                        data-bs-target="#exampleModalToggle">
-                                                                        <i class="ri-delete-bin-line"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
+                                                    }
                                                 </tbody>
                                             </table>
                                         </div>

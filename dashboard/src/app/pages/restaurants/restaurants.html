@@ -1,12 +1,12 @@
 <div class="page-body">
-                <!-- All User Table Start -->
+                <!-- Restaurants Table Start -->
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card card-table">
                                 <div class="card-body">
                                     <div class="title-header option-title">
-                                        <h5>All Users</h5>
+                                        <h5>Restaurants</h5>
                                         <form class="d-inline-flex">
                                             <a href="javascript:void(0)" class="align-items-center btn btn-theme d-flex">
                                                 <i data-feather="plus-square"></i>Add New
@@ -14,36 +14,35 @@
                                         </form>
                                     </div>
 
-                                    <div class="table-responsive theme-scrollbar table-product">
-                                        <table class="table category-table dataTable no-footer" id="table_id">
+                                    <div class="table-responsive category-table theme-scrollbar">
+                                        <table class="table all-package theme-table" id="table_id">
                                             <thead>
                                                 <tr>
-                                                    <th>No.</th>
-                                                    <th>User</th>
+                                                    <th>Logo</th>
                                                     <th>Name</th>
                                                     <th>Phone</th>
-                                                    <th>Email</th>
+                                                    <th>Address</th>
+                                                    <th>Rating</th>
+                                                    <th>Status</th>
                                                     <th>Option</th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
-                                                @for (user of users; track user.id; let index = $index) {
+                                                @for (restaurant of restaurants; track restaurant.id) {
                                                 <tr>
-                                                    <td class="f-w-600">{{ formatIndex(index) }}.</td>
                                                     <td>
                                                         <div class="table-image">
-                                                            <img [src]="user.avatar || 'assets/dashboard/images/users/1.jpg'" class="img-fluid rounded" [alt]="user.name || user.email || 'user'">
+                                                            <img [src]="restaurant.logo || restaurant.cover || 'assets/dashboard/images/product/1.png'" class="img-fluid" [alt]="restaurant.name">
                                                         </div>
                                                     </td>
-                                                    <td>
-                                                        <div class="user-name">
-                                                            <span>{{ user.name || 'Sin nombre' }}</span>
-                                                            <span>{{ user.type || 'client' }} / {{ user.status || 'active' }}</span>
-                                                        </div>
+                                                    <td>{{ restaurant.name }}</td>
+                                                    <td>{{ restaurant.phone || restaurant.whatsapp || '-' }}</td>
+                                                    <td>{{ restaurant.address || restaurant.city || '-' }}</td>
+                                                    <td class="td-price">{{ formatRating(restaurant) }}</td>
+                                                    <td class="status-close">
+                                                        <span>{{ restaurant.active ? 'Active' : 'Inactive' }}</span>
                                                     </td>
-                                                    <td>{{ user.phone || '-' }}</td>
-                                                    <td class="f-w-600">{{ user.email || '-' }}</td>
                                                     <td>
                                                         <ul>
                                                             <li><a href="javascript:void(0)"><i class="ri-eye-line"></i></a></li>
@@ -58,7 +57,7 @@
                                                 </tr>
                                                 } @empty {
                                                 <tr>
-                                                    <td colspan="6" class="text-center">No users found</td>
+                                                    <td colspan="7" class="text-center">No restaurants found</td>
                                                 </tr>
                                                 }
                                             </tbody>
@@ -69,8 +68,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- All User Table Ends-->
+                <!-- Restaurants Table Ends-->
 
-                
               <app-footer />
 </div>

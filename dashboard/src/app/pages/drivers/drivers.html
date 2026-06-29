@@ -1,12 +1,12 @@
 <div class="page-body">
-                <!-- All User Table Start -->
+                <!-- Drivers Table Start -->
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card card-table">
                                 <div class="card-body">
                                     <div class="title-header option-title">
-                                        <h5>All Users</h5>
+                                        <h5>Drivers</h5>
                                         <form class="d-inline-flex">
                                             <a href="javascript:void(0)" class="align-items-center btn btn-theme d-flex">
                                                 <i data-feather="plus-square"></i>Add New
@@ -19,31 +19,35 @@
                                             <thead>
                                                 <tr>
                                                     <th>No.</th>
-                                                    <th>User</th>
+                                                    <th>Driver</th>
                                                     <th>Name</th>
                                                     <th>Phone</th>
-                                                    <th>Email</th>
+                                                    <th>Vehicle</th>
+                                                    <th>Status</th>
                                                     <th>Option</th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
-                                                @for (user of users; track user.id; let index = $index) {
+                                                @for (driver of drivers; track driver.id; let index = $index) {
                                                 <tr>
                                                     <td class="f-w-600">{{ formatIndex(index) }}.</td>
                                                     <td>
                                                         <div class="table-image">
-                                                            <img [src]="user.avatar || 'assets/dashboard/images/users/1.jpg'" class="img-fluid rounded" [alt]="user.name || user.email || 'user'">
+                                                            <img [src]="driver.avatar || 'assets/dashboard/images/users/1.jpg'" class="img-fluid rounded" [alt]="driver.name || driver.email || 'driver'">
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="user-name">
-                                                            <span>{{ user.name || 'Sin nombre' }}</span>
-                                                            <span>{{ user.type || 'client' }} / {{ user.status || 'active' }}</span>
+                                                            <span>{{ driver.name || 'Sin nombre' }}</span>
+                                                            <span>{{ driver.email || '-' }}</span>
                                                         </div>
                                                     </td>
-                                                    <td>{{ user.phone || '-' }}</td>
-                                                    <td class="f-w-600">{{ user.email || '-' }}</td>
+                                                    <td>{{ driver.phone || '-' }}</td>
+                                                    <td class="f-w-600">{{ driver.vehicleType || '-' }}</td>
+                                                    <td class="status-close">
+                                                        <span>{{ driver.status || 'active' }}</span>
+                                                    </td>
                                                     <td>
                                                         <ul>
                                                             <li><a href="javascript:void(0)"><i class="ri-eye-line"></i></a></li>
@@ -58,7 +62,7 @@
                                                 </tr>
                                                 } @empty {
                                                 <tr>
-                                                    <td colspan="6" class="text-center">No users found</td>
+                                                    <td colspan="7" class="text-center">No drivers found</td>
                                                 </tr>
                                                 }
                                             </tbody>
@@ -69,8 +73,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- All User Table Ends-->
+                <!-- Drivers Table Ends-->
 
-                
               <app-footer />
 </div>

@@ -5,18 +5,18 @@ import { FooterComponent } from '../../layout/footer/footer';
 import { DalePuesUser } from '../../models/auth.models';
 
 @Component({
-  selector: 'app-users-page',
+  selector: 'app-drivers-page',
   imports: [FooterComponent],
-  templateUrl: './users.html',
+  templateUrl: './drivers.html',
   styles: [':host { display: contents; }']
 })
-export class UsersPageComponent implements AfterViewInit {
+export class DriversPageComponent implements AfterViewInit {
   private readonly adminData = inject(DalePuesAdminDataService);
   private readonly scripts = inject(ScriptLoaderService);
-  users: DalePuesUser[] = [];
+  drivers: DalePuesUser[] = [];
 
   async ngAfterViewInit(): Promise<void> {
-    await this.loadUsers();
+    await this.loadDrivers();
     await this.scripts.loadTemplateScripts(this.scripts.usersPageScripts);
   }
 
@@ -24,7 +24,7 @@ export class UsersPageComponent implements AfterViewInit {
     return `${index + 1}`.padStart(2, '0');
   }
 
-  private async loadUsers(): Promise<void> {
-    this.users = await this.adminData.getUsers();
+  private async loadDrivers(): Promise<void> {
+    this.drivers = await this.adminData.getCouriers();
   }
 }
