@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AuthPocketbaseService } from '../../core/services/auth-pocketbase.service';
+import { BrandingService } from '../../core/services/branding.service';
 import { ScriptLoaderService } from '../../core/services/script-loader.service';
 import { HeaderComponent } from '../header/header';
 import { SidebarComponent } from '../sidebar/sidebar';
@@ -12,9 +13,11 @@ import { SidebarComponent } from '../sidebar/sidebar';
 })
 export class AdminLayoutComponent implements AfterViewInit {
   private readonly auth = inject(AuthPocketbaseService);
+  private readonly branding = inject(BrandingService);
   private readonly scripts = inject(ScriptLoaderService);
 
   ngAfterViewInit(): void {
+    void this.branding.loadBranding();
     this.scripts.refreshTemplateDom();
   }
 

@@ -1,8 +1,9 @@
 <div class="sidebar-wrapper">
                 <div>
+                    @let branding = branding$ | async;
                     <div class="logo-wrapper logo-wrapper-center">
-                        <a routerLink="/dashboard" data-bs-original-title="" title="">
-                            <img class="img-fluid for-white" src="assets/dashboard/images/logo/full-white.svg" alt="logo">
+                        <a routerLink="/dashboard" data-bs-original-title="" [title]="branding?.appName || 'Dale Pues'" [attr.aria-label]="branding?.appName || 'Dale Pues'">
+                            <img class="img-fluid for-white" [src]="getLogoHorizontalUrl(branding)" [alt]="branding?.appName || 'Dale Pues'">
                         </a>
                         <div class="back-btn">
                             <i class="fa fa-angle-left"></i>
@@ -13,7 +14,7 @@
                     </div>
                     <div class="logo-icon-wrapper">
                         <a routerLink="/dashboard">
-                            <img class="img-fluid main-logo" src="assets/dashboard/images/logo/logo.png" alt="logo">
+                            <img class="img-fluid main-logo" [src]="getLogoSquareUrl(branding)" [alt]="branding?.appName || 'Dale Pues'">
                         </a>
                     </div>
                     <nav class="sidebar-main">
@@ -237,11 +238,11 @@
                                 <li class="sidebar-list">
                                     <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                                         <i class="ri-settings-line"></i>
-                                        <span><span class="menu-status pending"></span>Settings</span>
+                                        <span><span class="menu-status completed"></span>Settings</span>
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="javascript:void(0)">Profile Setting</a>
+                                            <a routerLink="/settings/profile"><span class="menu-status completed"></span>Profile Setting</a>
                                         </li>
                                     </ul>
                                 </li>

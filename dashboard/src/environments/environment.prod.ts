@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  pocketbaseUrl: 'https://api.dalepues.com'
+  pocketbaseUrl: 'https://db-dale-pues.buckapi.online:8090'
 };

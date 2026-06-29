@@ -49,6 +49,11 @@ export const routes: Routes = [
       {
         path: 'drivers',
         loadComponent: () => import('./pages/drivers/drivers').then((m) => m.DriversPageComponent)
+      },
+      {
+        path: 'settings/profile',
+        loadComponent: () =>
+          import('./pages/settings/profile-settings/profile-settings').then((m) => m.ProfileSettingsPageComponent)
       }
     ]
   },

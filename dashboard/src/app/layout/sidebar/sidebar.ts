@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { BrandingService } from '../../core/services/branding.service';
+import { SettingsService } from '../../core/services/settings.service';
+import { AppSettings } from '../../models/dale-pues.models';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterLink],
+  imports: [RouterLink, AsyncPipe],
   templateUrl: './sidebar.html',
   styles: [
     ':host { display: contents; }',
@@ -29,4 +33,17 @@ import { RouterLink } from '@angular/router';
     `
   ]
 })
-export class SidebarComponent {}
+export class SidebarComponent {
+  private readonly branding = inject(BrandingService);
+  private readonly settings = inject(SettingsService);
+
+  readonly branding$ = this.branding.branding$;
+
+  getLogoHorizontalUrl(settings: AppSettings | null): string {
+    return this.settings.getLogoHorizontalUrl(settings);
+  }
+
+  getLogoSquareUrl(settings: AppSettings | null): string {
+    return this.settings.getLogoSquareUrl(settings);
+  }
+}

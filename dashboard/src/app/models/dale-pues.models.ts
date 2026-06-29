@@ -152,3 +152,34 @@ export interface DashboardStats {
   banners: number;
   promotions: number;
 }
+
+export interface AppSettings {
+  id?: string;
+  collectionId?: string;
+  collectionName?: string;
+  key: string;
+  appName: string;
+  slogan?: string;
+  logoHorizontal?: string;
+  logoSquare?: string;
+  primaryColor?: string;
+  secondaryColor?: string;
+  accentColor?: string;
+  supportEmail?: string;
+  supportPhone?: string;
+  websiteUrl?: string;
+  country?: string;
+  currency?: string;
+  timezone?: string;
+  maintenanceMode?: boolean;
+  active?: boolean;
+  created?: string;
+  updated?: string;
+}
+
+export type AppSettingsPayload = Partial<Omit<AppSettings, 'id' | 'collectionId' | 'collectionName' | 'created' | 'updated'>>;
+
+export interface AppSettingsFiles {
+  logoHorizontal?: File | null;
+  logoSquare?: File | null;
+}

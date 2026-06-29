@@ -1,0 +1,208 @@
+<div class="page-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="title-header option-title">
+                                        <h5>Settings / Branding</h5>
+                                    </div>
+
+                                    @if (loading) {
+                                    <div class="py-4 text-center">Loading settings...</div>
+                                    } @else {
+                                    @if (error) {
+                                    <div class="alert alert-danger">{{ error }}</div>
+                                    }
+
+                                    @if (success) {
+                                    <div class="alert alert-success">{{ success }}</div>
+                                    }
+
+                                    <form class="theme-form theme-form-2 mega-form" [formGroup]="form" (ngSubmit)="saveSettings()">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="form-label-title col-sm-3 mb-0">App name</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" type="text" formControlName="appName" placeholder="Dale Pues">
+                                                        @if (hasError('appName')) {
+                                                        <small class="text-danger">App name is required.</small>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="form-label-title col-sm-3 mb-0">Slogan</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" type="text" formControlName="slogan" placeholder="Delivery rápido y confiable">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="form-label-title col-sm-3 mb-0">Logo horizontal</label>
+                                                    <div class="col-sm-9">
+                                                        <div class="branding-preview horizontal mb-3">
+                                                            <img [src]="logoHorizontalPreview" alt="Logo horizontal preview">
+                                                        </div>
+                                                        <input class="form-control" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" (change)="onFileChange($event, 'logoHorizontal')">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="form-label-title col-sm-3 mb-0">Logo square</label>
+                                                    <div class="col-sm-9">
+                                                        <div class="branding-preview square mb-3">
+                                                            <img [src]="logoSquarePreview" alt="Logo square preview">
+                                                        </div>
+                                                        <input class="form-control" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" (change)="onFileChange($event, 'logoSquare')">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="form-label-title col-sm-3 mb-0">Primary color</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control form-control-color color-control" type="color" formControlName="primaryColor">
+                                                        @if (hasError('primaryColor')) {
+                                                        <small class="text-danger">Use a valid hex color.</small>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="form-label-title col-sm-3 mb-0">Secondary color</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control form-control-color color-control" type="color" formControlName="secondaryColor">
+                                                        @if (hasError('secondaryColor')) {
+                                                        <small class="text-danger">Use a valid hex color.</small>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="form-label-title col-sm-3 mb-0">Accent color</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control form-control-color color-control" type="color" formControlName="accentColor">
+                                                        @if (hasError('accentColor')) {
+                                                        <small class="text-danger">Use a valid hex color.</small>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="form-label-title col-sm-3 mb-0">Support email</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" type="email" formControlName="supportEmail" placeholder="soporte@dalepues.com">
+                                                        @if (hasError('supportEmail')) {
+                                                        <small class="text-danger">Use a valid email.</small>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="form-label-title col-sm-3 mb-0">Support phone</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" type="text" formControlName="supportPhone" placeholder="+58 000 0000000">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="form-label-title col-sm-3 mb-0">Website URL</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" type="url" formControlName="websiteUrl" placeholder="https://dalepues.com">
+                                                        @if (hasError('websiteUrl')) {
+                                                        <small class="text-danger">Use a URL starting with http:// or https://.</small>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="form-label-title col-sm-3 mb-0">Country</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" type="text" formControlName="country">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="form-label-title col-sm-3 mb-0">Currency</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" type="text" formControlName="currency">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="form-label-title col-sm-3 mb-0">Timezone</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" type="text" formControlName="timezone">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="form-label-title col-sm-3 mb-0">Maintenance mode</label>
+                                                    <div class="col-sm-9">
+                                                        <div class="form-check user-checkbox ps-0">
+                                                            <input class="checkbox_animated check-it" id="maintenanceMode" type="checkbox" formControlName="maintenanceMode">
+                                                            <label class="form-check-label" for="maintenanceMode">Enable maintenance mode</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="form-label-title col-sm-3 mb-0">Active</label>
+                                                    <div class="col-sm-9">
+                                                        <div class="form-check user-checkbox ps-0">
+                                                            <input class="checkbox_animated check-it" id="active" type="checkbox" formControlName="active">
+                                                            <label class="form-check-label" for="active">Use this branding configuration</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <div class="col-sm-9 offset-sm-3">
+                                                        <button class="btn btn-theme" type="submit" [disabled]="saving">
+                                                            {{ saving ? 'Saving...' : 'Save settings' }}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+              <app-footer />
+</div>
