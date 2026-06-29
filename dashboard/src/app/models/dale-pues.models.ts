@@ -1,6 +1,9 @@
 export type ContentSection = 'home' | 'food' | 'grocery' | 'pharmacy';
 export type BusinessType = 'restaurant' | 'grocery' | 'pharmacy' | 'courier' | 'store';
 export type ProductType = 'food' | 'grocery' | 'pharmacy';
+export type DiscountType = 'percentage' | 'fixed' | 'combo' | 'text';
+
+export type FileInput = File | Blob | string | null | undefined;
 
 export interface DalePuesCategory {
   id: string;
@@ -17,6 +20,10 @@ export interface DalePuesCategory {
   created?: string;
   updated?: string;
 }
+
+export type DalePuesCategoryPayload = Partial<Omit<DalePuesCategory, 'id' | 'image' | 'created' | 'updated'>> & {
+  image?: FileInput;
+};
 
 export interface DalePuesBusiness {
   id: string;
@@ -45,6 +52,13 @@ export interface DalePuesBusiness {
   updated?: string;
 }
 
+export type DalePuesBusinessPayload = Partial<
+  Omit<DalePuesBusiness, 'id' | 'logo' | 'cover' | 'created' | 'updated'>
+> & {
+  logo?: FileInput;
+  cover?: FileInput;
+};
+
 export interface DalePuesProduct {
   id: string;
   business?: string;
@@ -69,6 +83,59 @@ export interface DalePuesProduct {
   created?: string;
   updated?: string;
 }
+
+export type DalePuesProductPayload = Partial<Omit<DalePuesProduct, 'id' | 'image' | 'created' | 'updated'>> & {
+  image?: FileInput;
+};
+
+export interface DalePuesBanner {
+  id: string;
+  title: string;
+  subtitle?: string;
+  highlight?: string;
+  image?: string;
+  imageUrl?: string;
+  alt?: string;
+  ctaText?: string;
+  link?: string;
+  section: ContentSection;
+  position?: number;
+  active?: boolean;
+  startDate?: string;
+  endDate?: string;
+  created?: string;
+  updated?: string;
+}
+
+export type DalePuesBannerPayload = Partial<Omit<DalePuesBanner, 'id' | 'image' | 'created' | 'updated'>> & {
+  image?: FileInput;
+};
+
+export interface DalePuesPromotion {
+  id: string;
+  title: string;
+  description?: string;
+  business?: string;
+  product?: string;
+  section: ContentSection;
+  discountType: DiscountType;
+  discountValue?: number;
+  badgeText?: string;
+  image?: string;
+  imageUrl?: string;
+  active?: boolean;
+  startDate?: string;
+  endDate?: string;
+  order?: number;
+  created?: string;
+  updated?: string;
+}
+
+export type DalePuesPromotionPayload = Partial<
+  Omit<DalePuesPromotion, 'id' | 'image' | 'created' | 'updated'>
+> & {
+  image?: FileInput;
+};
 
 export interface DashboardStats {
   categories: number;

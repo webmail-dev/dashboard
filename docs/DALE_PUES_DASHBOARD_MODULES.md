@@ -6,6 +6,31 @@ Fecha: 2026-06-29
 
 El dashboard Angular se esta conectando al esquema real de Dale Pues sin crear colecciones nuevas. Los modulos implementados consumen PocketBase mediante una unica instancia SDK y respetan las colecciones documentadas en `DALE_PUES_INTEGRATION_ANALYSIS.md`.
 
+## Capa de servicios PocketBase
+
+Estado: implementada.
+
+Archivos:
+
+- `dashboard/src/app/core/services/pocketbase.service.ts`
+- `dashboard/src/app/core/services/dale-pues-crud.service.ts`
+- `dashboard/src/app/core/services/categories.service.ts`
+- `dashboard/src/app/core/services/businesses.service.ts`
+- `dashboard/src/app/core/services/products.service.ts`
+- `dashboard/src/app/core/services/users.service.ts`
+- `dashboard/src/app/core/services/banners.service.ts`
+- `dashboard/src/app/core/services/promotions.service.ts`
+- `dashboard/src/app/core/services/dale-pues-admin-data.service.ts`
+
+Decision:
+
+- `PocketbaseService` mantiene una sola instancia `new PocketBase(environment.pocketbaseUrl)`.
+- `PocketbaseService` expone `getInstance`, `getBaseUrl`, `isAuthenticated` y `clearAuth`.
+- `DalePuesCrudService` centraliza `list`, `getFullList`, `getOne`, `create`, `update`, `delete`, `setActive`, `count`, resolucion de archivos PocketBase y envio de `FormData`.
+- Los servicios por coleccion solo usan colecciones reales: `users`, `categories`, `businesses`, `products`, `banners`, `promotions`.
+- `DalePuesAdminDataService` queda como fachada compatible para las paginas actuales y delega en los servicios especificos.
+- No se agregan servicios para pedidos, pagos, carrito o tracking porque no existen colecciones reales.
+
 ## 1. Configuracion PocketBase
 
 Estado: implementado.

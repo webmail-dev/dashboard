@@ -9,4 +9,16 @@ export class PocketbaseService {
   getInstance(): PocketBase {
     return this.pb;
   }
+
+  getBaseUrl(): string {
+    return environment.pocketbaseUrl;
+  }
+
+  isAuthenticated(): boolean {
+    return this.pb.authStore.isValid && !!this.pb.authStore.record;
+  }
+
+  clearAuth(): void {
+    this.pb.authStore.clear();
+  }
 }
