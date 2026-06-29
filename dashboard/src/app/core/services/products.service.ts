@@ -35,7 +35,7 @@ export class ProductsService extends DalePuesCrudService<DalePuesProduct, DalePu
       name: record['name'],
       slug: record['slug'],
       description: record['description'],
-      image: this.getImageUrl(record, 'image'),
+      image: this.resolveImage(record, 'image'),
       imageUrl: record['imageUrl'],
       alt: record['alt'],
       type: record['type'],

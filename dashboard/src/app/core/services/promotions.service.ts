@@ -30,7 +30,7 @@ export class PromotionsService extends DalePuesCrudService<DalePuesPromotion, Da
       discountType: record['discountType'],
       discountValue: Number(record['discountValue'] || 0),
       badgeText: record['badgeText'],
-      image: this.getImageUrl(record, 'image'),
+      image: this.resolveImage(record, 'image'),
       imageUrl: record['imageUrl'],
       active: record['active'],
       startDate: record['startDate'],

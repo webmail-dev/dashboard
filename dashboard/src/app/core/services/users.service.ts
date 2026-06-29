@@ -26,8 +26,8 @@ export class UsersService extends DalePuesCrudService<DalePuesUser, DalePuesUser
     return this.update(id, { status });
   }
 
-  protected override getImageUrl(record: RecordModel, fieldName: string): string {
-    const fileUrl = super.getImageUrl(record, fieldName);
+  protected override resolveImage(record: RecordModel, fieldName: string): string {
+    const fileUrl = super.resolveImage(record, fieldName);
     if (fileUrl) return fileUrl;
 
     const value = record[fieldName];
@@ -42,7 +42,7 @@ export class UsersService extends DalePuesCrudService<DalePuesUser, DalePuesUser
       phone: record['phone'],
       type: record['type'],
       status: record['status'],
-      avatar: this.getImageUrl(record, 'avatar'),
+      avatar: this.resolveImage(record, 'avatar'),
       address: record['address'],
       city: record['city'],
       state: record['state'],

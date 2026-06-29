@@ -24,7 +24,7 @@ export class BannersService extends DalePuesCrudService<DalePuesBanner, DalePues
       title: record['title'],
       subtitle: record['subtitle'],
       highlight: record['highlight'],
-      image: this.getImageUrl(record, 'image'),
+      image: this.resolveImage(record, 'image'),
       imageUrl: record['imageUrl'],
       alt: record['alt'],
       ctaText: record['ctaText'],

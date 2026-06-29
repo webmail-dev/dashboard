@@ -76,7 +76,7 @@ export abstract class DalePuesCrudService<TRecord, TPayload extends DalePuesPayl
       .catch(() => 0);
   }
 
-  protected getImageUrl(record: RecordModel, fieldName: string): string {
+  protected resolveImage(record: RecordModel, fieldName: string): string {
     const fileValue = record[fieldName];
     const urlValue = record[`${fieldName}Url`];
 

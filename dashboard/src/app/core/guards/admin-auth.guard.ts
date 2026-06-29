@@ -7,7 +7,16 @@ export const adminAuthGuard: CanActivateFn = async () => {
   const router = inject(Router);
   const user = auth.getCurrentUser() || (await auth.refreshSession());
 
-  if (!user || auth.isBlockedOrInactive(user) || !auth.hasAdminAccess(user)) {
+  if (!user) {
+    return router.createUrlTree(['/login']);
+  }
+
+  if (auth.isBlockedOrInactive(user)) {
+    auth.logout();
+    return router.createUrlTree(['/login']);
+  }
+
+  if (!auth.hasAdminAccess(user)) {
     return router.createUrlTree(['/login']);
   }
 

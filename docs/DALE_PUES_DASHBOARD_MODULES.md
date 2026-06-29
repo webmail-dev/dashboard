@@ -24,9 +24,8 @@ Archivos:
 
 Decision:
 
-- `PocketbaseService` mantiene una sola instancia `new PocketBase(environment.pocketbaseUrl)`.
-- `PocketbaseService` expone `getInstance`, `getBaseUrl`, `isAuthenticated` y `clearAuth`.
-- `DalePuesCrudService` centraliza `list`, `getFullList`, `getOne`, `create`, `update`, `delete`, `setActive`, `count`, resolucion de archivos PocketBase y envio de `FormData`.
+- `PocketbaseService` mantiene una sola instancia `new PocketBase(environment.pocketbaseUrl)` y expone `getInstance`, igual que Dale Pues.
+- `DalePuesCrudService` centraliza `list`, `getFullList`, `getOne`, `create`, `update`, `delete`, `setActive`, `count`, resolucion de archivos PocketBase con `resolveImage` y envio de `FormData`.
 - Los servicios por coleccion solo usan colecciones reales: `users`, `categories`, `businesses`, `products`, `banners`, `promotions`.
 - `DalePuesAdminDataService` queda como fachada compatible para las paginas actuales y delega en los servicios especificos.
 - No se agregan servicios para pedidos, pagos, carrito o tracking porque no existen colecciones reales.

@@ -24,7 +24,7 @@ export class CategoriesService extends DalePuesCrudService<DalePuesCategory, Dal
       name: record['name'],
       slug: record['slug'],
       type: record['type'],
-      image: this.getImageUrl(record, 'image'),
+      image: this.resolveImage(record, 'image'),
       imageUrl: record['imageUrl'],
       icon: record['icon'],
       alt: record['alt'],
