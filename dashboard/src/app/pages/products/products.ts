@@ -5,12 +5,13 @@ import { FooterComponent } from '../../layout/footer/footer';
 @Component({
   selector: 'app-products-page',
   imports: [FooterComponent],
-  templateUrl: './products.html'
+  templateUrl: './products.html',
+  styles: [':host { display: contents; }']
 })
 export class ProductsPageComponent implements AfterViewInit {
   private readonly scripts = inject(ScriptLoaderService);
 
   ngAfterViewInit(): void {
-    void this.scripts.loadTemplateScripts(this.scripts.dataTableScripts);
+    void this.scripts.loadTemplateScripts(this.scripts.productsPageScripts);
   }
 }

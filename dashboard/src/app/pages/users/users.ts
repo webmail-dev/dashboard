@@ -5,12 +5,13 @@ import { FooterComponent } from '../../layout/footer/footer';
 @Component({
   selector: 'app-users-page',
   imports: [FooterComponent],
-  templateUrl: './users.html'
+  templateUrl: './users.html',
+  styles: [':host { display: contents; }']
 })
 export class UsersPageComponent implements AfterViewInit {
   private readonly scripts = inject(ScriptLoaderService);
 
   ngAfterViewInit(): void {
-    void this.scripts.loadTemplateScripts([...this.scripts.dataTableScripts, 'assets/dashboard/js/checkbox-all-check.js']);
+    void this.scripts.loadTemplateScripts(this.scripts.usersPageScripts);
   }
 }
