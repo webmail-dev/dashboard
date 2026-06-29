@@ -22,9 +22,30 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
               }
             ],
             "styles": [
+              "src/assets/dashboard/css/linearicon.css",
+              "src/assets/dashboard/css/vendors/font-awesome.css",
+              "src/assets/dashboard/css/vendors/themify.css",
+              "src/assets/dashboard/css/ratio.css",
+              "src/assets/dashboard/css/remixicon.css",
+              "src/assets/dashboard/css/vendors/feather-icon.css",
+              "src/assets/dashboard/css/vendors/scrollbar.css",
+              "src/assets/dashboard/css/vendors/animate.css",
+              "src/assets/dashboard/css/vendors/bootstrap.css",
+              "src/assets/dashboard/css/vector-map.css",
+              "src/assets/dashboard/css/vendors/swiper-bundle.min.css",
+              "src/assets/dashboard/css/vendors/slick.css",
+              "src/assets/dashboard/css/datatables.css",
+              "src/assets/dashboard/css/select2.min.css",
+              "src/assets/dashboard/css/vendors/dropzone.css",
+              "src/assets/dashboard/css/style.css",
               "src/styles.css"
             ]
           },
