@@ -124,6 +124,8 @@ Decision:
 - Se mantiene la tabla y clases originales.
 - No se crea coleccion nueva para inventario.
 - `stock` viene del campo real `products.stock`.
+- La pagina usa una consulta progresiva: primero `getList(1, 200, { sort: '-updated' })`; si la instancia PocketBase rechaza ese sort, cae a `getList(1, 200)` sin `sort`.
+- No usa `expand=business,category` en el listado principal porque algunas instancias reales pueden tener esquema desalineado con la migracion documentada. Los nombres de negocio y categoria se resuelven despues con consultas tolerantes por id.
 
 ## 6. Restaurantes
 

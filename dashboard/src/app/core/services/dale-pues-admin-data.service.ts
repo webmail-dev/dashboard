@@ -53,7 +53,7 @@ export class DalePuesAdminDataService {
   }
 
   async getProducts(): Promise<DalePuesProduct[]> {
-    return this.products.getFullList({ sort: '-updated', expand: 'business,category' });
+    return this.products.getDashboardProducts();
   }
 
   async getRestaurants(): Promise<DalePuesBusiness[]> {
