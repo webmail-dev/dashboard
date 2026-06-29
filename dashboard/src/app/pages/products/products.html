@@ -22,17 +22,28 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    @if (loading) {
+                                    <div class="py-4 text-center">Loading products...</div>
+                                    } @else if (error) {
+                                    <div class="alert alert-danger mb-0">{{ error }}</div>
+                                    } @else {
                                     <div>
                                         <div class="table-responsive theme-scrollbar">
                                             <table class="table category-table dataTable no-footer" id="table_id">
                                                 <thead>
                                                     <tr>
                                                         <th><input id="checkall" class="custom-checkbox" type="checkbox" name="text"></th>
-                                                        <th>Product Image</th>
-                                                        <th>Product Name</th>
+                                                        <th>Image</th>
+                                                        <th>Name</th>
+                                                        <th>Slug</th>
+                                                        <th>Business</th>
                                                         <th>Category</th>
-                                                        <th>Current Qty</th>
+                                                        <th>Type</th>
+                                                        <th>Stock</th>
                                                         <th>Price</th>
+                                                        <th>Rating</th>
+                                                        <th>Featured</th>
+                                                        <th>Delivery</th>
                                                         <th>Status</th>
                                                         <th>Option</th>
                                                     </tr>
@@ -48,9 +59,15 @@
                                                             </div>
                                                         </td>
                                                         <td>{{ product.name }}</td>
+                                                        <td>{{ product.slug }}</td>
+                                                        <td>{{ product.businessName || product.business || '-' }}</td>
+                                                        <td>{{ product.categoryName || product.category || '-' }}</td>
                                                         <td>{{ product.type }}</td>
                                                         <td class="f-w-500">{{ product.stock || 0 }}</td>
                                                         <td class="td-price">{{ formatPrice(product) }}</td>
+                                                        <td>{{ product.rating || 0 }}</td>
+                                                        <td>{{ product.featured ? 'Yes' : 'No' }}</td>
+                                                        <td>{{ product.deliveryTime || '-' }}</td>
                                                         <td [class]="product.active ? 'status-close' : 'status-danger'">
                                                             <span>{{ product.active ? 'Active' : 'Inactive' }}</span>
                                                         </td>
@@ -68,13 +85,14 @@
                                                     </tr>
                                                     } @empty {
                                                     <tr>
-                                                        <td colspan="8" class="text-center">No products found</td>
+                                                        <td colspan="13" class="text-center">No products found</td>
                                                     </tr>
                                                     }
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
+                                    }
                                 </div>
                             </div>
                         </div>

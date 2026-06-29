@@ -14,6 +14,11 @@
                                         </form>
                                     </div>
 
+                                    @if (loading) {
+                                    <div class="py-4 text-center">Loading users...</div>
+                                    } @else if (error) {
+                                    <div class="alert alert-danger mb-0">{{ error }}</div>
+                                    } @else {
                                     <div class="table-responsive theme-scrollbar table-product">
                                         <table class="table category-table dataTable no-footer" id="table_id">
                                             <thead>
@@ -23,6 +28,10 @@
                                                     <th>Name</th>
                                                     <th>Phone</th>
                                                     <th>Email</th>
+                                                    <th>Type</th>
+                                                    <th>Status</th>
+                                                    <th>Profile</th>
+                                                    <th>Last Login</th>
                                                     <th>Option</th>
                                                 </tr>
                                             </thead>
@@ -39,11 +48,15 @@
                                                     <td>
                                                         <div class="user-name">
                                                             <span>{{ user.name || 'Sin nombre' }}</span>
-                                                            <span>{{ user.type || 'client' }} / {{ user.status || 'active' }}</span>
+                                                            <span>{{ user.city || user.country || '-' }}</span>
                                                         </div>
                                                     </td>
                                                     <td>{{ user.phone || '-' }}</td>
                                                     <td class="f-w-600">{{ user.email || '-' }}</td>
+                                                    <td>{{ user.type || 'client' }}</td>
+                                                    <td>{{ user.status || 'active' }}</td>
+                                                    <td>{{ user.profileCompleted ? 'Complete' : 'Pending' }}</td>
+                                                    <td>{{ user.lastLoginAt || '-' }}</td>
                                                     <td>
                                                         <ul>
                                                             <li><a href="javascript:void(0)"><i class="ri-eye-line"></i></a></li>
@@ -58,12 +71,13 @@
                                                 </tr>
                                                 } @empty {
                                                 <tr>
-                                                    <td colspan="6" class="text-center">No users found</td>
+                                                    <td colspan="10" class="text-center">No users found</td>
                                                 </tr>
                                                 }
                                             </tbody>
                                         </table>
                                     </div>
+                                    }
                                 </div>
                             </div>
                         </div>

@@ -14,7 +14,15 @@ export class BusinessesService extends DalePuesCrudService<DalePuesBusiness, Dal
   getByType(type: BusinessType): Promise<DalePuesBusiness[]> {
     return this.getFullList({
       filter: `type = "${type}"`,
-      sort: '-featured,name'
+      sort: '-featured,name',
+      expand: 'owner'
+    });
+  }
+
+  getAll(): Promise<DalePuesBusiness[]> {
+    return this.getFullList({
+      sort: '-featured,name',
+      expand: 'owner'
     });
   }
 
@@ -50,6 +58,7 @@ export class BusinessesService extends DalePuesCrudService<DalePuesBusiness, Dal
       active: record['active'],
       featured: record['featured'],
       owner: record['owner'],
+      ownerName: this.getExpandedText(record, 'owner'),
       created: record['created'],
       updated: record['updated']
     };

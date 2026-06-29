@@ -99,6 +99,23 @@ export abstract class DalePuesCrudService<TRecord, TPayload extends DalePuesPayl
     return '';
   }
 
+  protected getExpandedText(record: RecordModel, relationName: string, fieldName = 'name'): string {
+    const expand = record['expand'];
+
+    if (!expand || typeof expand !== 'object' || Array.isArray(expand)) {
+      return '';
+    }
+
+    const expandedRecord = (expand as Record<string, unknown>)[relationName];
+
+    if (!expandedRecord || typeof expandedRecord !== 'object' || Array.isArray(expandedRecord)) {
+      return '';
+    }
+
+    const value = (expandedRecord as Record<string, unknown>)[fieldName];
+    return typeof value === 'string' ? value : '';
+  }
+
   protected toBody(payload: TPayload): FormData | TPayload {
     const hasFile = Object.values(payload).some((value) => value instanceof Blob);
 

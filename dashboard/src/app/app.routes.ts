@@ -35,6 +35,18 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/restaurants/restaurants').then((m) => m.RestaurantsPageComponent)
       },
       {
+        path: 'businesses',
+        loadComponent: () => import('./pages/businesses/businesses').then((m) => m.BusinessesPageComponent)
+      },
+      {
+        path: 'banners',
+        loadComponent: () => import('./pages/banners/banners').then((m) => m.BannersPageComponent)
+      },
+      {
+        path: 'promotions',
+        loadComponent: () => import('./pages/promotions/promotions').then((m) => m.PromotionsPageComponent)
+      },
+      {
         path: 'drivers',
         loadComponent: () => import('./pages/drivers/drivers').then((m) => m.DriversPageComponent)
       }

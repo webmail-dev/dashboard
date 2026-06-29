@@ -1,4 +1,13 @@
 <div class="page-body">
+                @if (loading || error) {
+                <div class="container-fluid">
+                    @if (loading) {
+                    <div class="py-3 text-center">Loading dashboard...</div>
+                    } @else if (error) {
+                    <div class="alert alert-danger mb-0">{{ error }}</div>
+                    }
+                </div>
+                }
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xxl-3 col-xl-4 col-md-4 col-12">

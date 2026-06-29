@@ -29,6 +29,7 @@ Decision:
 - Los servicios por coleccion solo usan colecciones reales: `users`, `categories`, `businesses`, `products`, `banners`, `promotions`.
 - `DalePuesAdminDataService` queda como fachada compatible para las paginas actuales y delega en los servicios especificos.
 - No se agregan servicios para pedidos, pagos, carrito o tracking porque no existen colecciones reales.
+- Las paginas que cargan datos async usan `loading`, `error` y `ChangeDetectorRef.detectChanges()` para evitar render incompleto despues de recibir datos desde PocketBase.
 
 ## 1. Configuracion PocketBase
 
@@ -152,6 +153,23 @@ Decision:
 - Se conserva estructura visual de tabla de la plantilla.
 - Las imagenes resuelven `logo`, luego `cover`, y luego fallback visual de la plantilla.
 
+## 6.1. Negocios
+
+Estado: listado real implementado.
+
+Coleccion:
+
+- `businesses`
+
+Campos usados:
+
+- `name`, `slug`, `type`, `logo`, `cover`, `phone`, `whatsapp`, `city`, `address`, `rating`, `featured`, `active`, `owner`.
+
+Decision:
+
+- Esta pagina cubre la coleccion completa `businesses`.
+- `restaurants` queda como vista filtrada por `type = "restaurant"`.
+
 ## 7. Usuarios
 
 Estado: listado real implementado.
@@ -213,3 +231,44 @@ Media:
 Reportes:
 
 - Solo pueden construirse con agregaciones de colecciones existentes hasta que exista esquema transaccional.
+
+## 11. Banners
+
+Estado: listado real implementado.
+
+Coleccion:
+
+- `banners`
+
+Campos usados:
+
+- `title`, `subtitle`, `highlight`, `image`, `imageUrl`, `alt`, `ctaText`, `link`, `section`, `position`, `active`, `startDate`, `endDate`.
+
+## 12. Promociones
+
+Estado: listado real implementado.
+
+Coleccion:
+
+- `promotions`
+
+Campos usados:
+
+- `title`, `description`, `business`, `product`, `section`, `discountType`, `discountValue`, `badgeText`, `image`, `imageUrl`, `active`, `startDate`, `endDate`, `order`.
+
+Relaciones:
+
+- `business` se expande contra `businesses`.
+- `product` se expande contra `products`.
+
+## Cobertura de colecciones
+
+| Coleccion | Estado en dashboard | Nota |
+| --- | --- | --- |
+| `users` | Cubierta | Lista completa y vista filtrada de conductores. |
+| `categories` | Cubierta | Lista con seccion, orden, estado e imagen. |
+| `businesses` | Cubierta | Lista completa y restaurantes filtrados. |
+| `products` | Cubierta | Muestra relaciones, stock, rating, featured, delivery y estado. |
+| `banners` | Cubierta | Lista por seccion, posicion, CTA y fechas. |
+| `promotions` | Cubierta | Lista con relaciones a negocio/producto. |
+| Pedidos/pagos/carrito/tracking | No aplica | No existen colecciones ni migraciones reales. |

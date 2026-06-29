@@ -2,40 +2,40 @@ import { AfterViewInit, ChangeDetectorRef, Component, inject } from '@angular/co
 import { DalePuesAdminDataService } from '../../core/services/dale-pues-admin-data.service';
 import { ScriptLoaderService } from '../../core/services/script-loader.service';
 import { FooterComponent } from '../../layout/footer/footer';
-import { DalePuesUser } from '../../models/auth.models';
+import { DalePuesBusiness } from '../../models/dale-pues.models';
 
 @Component({
-  selector: 'app-users-page',
+  selector: 'app-businesses-page',
   imports: [FooterComponent],
-  templateUrl: './users.html',
+  templateUrl: './businesses.html',
   styles: [':host { display: contents; }']
 })
-export class UsersPageComponent implements AfterViewInit {
+export class BusinessesPageComponent implements AfterViewInit {
   private readonly adminData = inject(DalePuesAdminDataService);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly scripts = inject(ScriptLoaderService);
-  users: DalePuesUser[] = [];
+  businesses: DalePuesBusiness[] = [];
   loading = false;
   error = '';
 
   async ngAfterViewInit(): Promise<void> {
-    await this.loadUsers();
-    await this.scripts.loadTemplateScripts(this.scripts.usersPageScripts);
+    await this.loadBusinesses();
+    await this.scripts.loadTemplateScripts(this.scripts.productsPageScripts);
   }
 
-  formatIndex(index: number): string {
-    return `${index + 1}`.padStart(2, '0');
+  formatRating(business: DalePuesBusiness): string {
+    return (business.rating || 0).toFixed(1);
   }
 
-  private async loadUsers(): Promise<void> {
+  private async loadBusinesses(): Promise<void> {
     this.loading = true;
     this.error = '';
     this.cdr.detectChanges();
 
     try {
-      this.users = await this.adminData.getUsers();
+      this.businesses = await this.adminData.getBusinesses();
     } catch (error) {
-      this.users = [];
+      this.businesses = [];
       this.error = this.parseError(error);
     } finally {
       this.loading = false;
@@ -44,6 +44,6 @@ export class UsersPageComponent implements AfterViewInit {
   }
 
   private parseError(error: unknown): string {
-    return error instanceof Error ? error.message : 'No fue posible cargar usuarios.';
+    return error instanceof Error ? error.message : 'No fue posible cargar negocios.';
   }
 }

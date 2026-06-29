@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ScriptLoaderService } from '../../core/services/script-loader.service';
 import { DalePuesAdminDataService } from '../../core/services/dale-pues-admin-data.service';
@@ -13,6 +13,7 @@ import { DashboardStats } from '../../models/dale-pues.models';
 })
 export class DashboardPageComponent implements AfterViewInit {
   private readonly adminData = inject(DalePuesAdminDataService);
+  private readonly cdr = inject(ChangeDetectorRef);
   private readonly scripts = inject(ScriptLoaderService);
   stats: DashboardStats = {
     categories: 0,
@@ -20,8 +21,12 @@ export class DashboardPageComponent implements AfterViewInit {
     restaurants: 0,
     users: 0,
     couriers: 0,
-    pendingUsers: 0
+    pendingUsers: 0,
+    banners: 0,
+    promotions: 0
   };
+  loading = false;
+  error = '';
 
   ngAfterViewInit(): void {
     void this.scripts.loadTemplateScripts(this.scripts.dashboardPageScripts);
@@ -29,6 +34,21 @@ export class DashboardPageComponent implements AfterViewInit {
   }
 
   private async loadStats(): Promise<void> {
-    this.stats = await this.adminData.getDashboardStats();
+    this.loading = true;
+    this.error = '';
+    this.cdr.detectChanges();
+
+    try {
+      this.stats = await this.adminData.getDashboardStats();
+    } catch (error) {
+      this.error = this.parseError(error);
+    } finally {
+      this.loading = false;
+      this.cdr.detectChanges();
+    }
+  }
+
+  private parseError(error: unknown): string {
+    return error instanceof Error ? error.message : 'No fue posible cargar metricas.';
   }
 }

@@ -14,15 +14,23 @@
                                         </form>
                                     </div>
 
+                                    @if (loading) {
+                                    <div class="py-4 text-center">Loading restaurants...</div>
+                                    } @else if (error) {
+                                    <div class="alert alert-danger mb-0">{{ error }}</div>
+                                    } @else {
                                     <div class="table-responsive category-table theme-scrollbar">
                                         <table class="table all-package theme-table" id="table_id">
                                             <thead>
                                                 <tr>
                                                     <th>Logo</th>
                                                     <th>Name</th>
+                                                    <th>Slug</th>
                                                     <th>Phone</th>
                                                     <th>Address</th>
                                                     <th>Rating</th>
+                                                    <th>Delivery</th>
+                                                    <th>Featured</th>
                                                     <th>Status</th>
                                                     <th>Option</th>
                                                 </tr>
@@ -37,9 +45,12 @@
                                                         </div>
                                                     </td>
                                                     <td>{{ restaurant.name }}</td>
+                                                    <td>{{ restaurant.slug }}</td>
                                                     <td>{{ restaurant.phone || restaurant.whatsapp || '-' }}</td>
                                                     <td>{{ restaurant.address || restaurant.city || '-' }}</td>
                                                     <td class="td-price">{{ formatRating(restaurant) }}</td>
+                                                    <td>{{ restaurant.deliveryTime || '-' }}</td>
+                                                    <td>{{ restaurant.featured ? 'Yes' : 'No' }}</td>
                                                     <td class="status-close">
                                                         <span>{{ restaurant.active ? 'Active' : 'Inactive' }}</span>
                                                     </td>
@@ -57,12 +68,13 @@
                                                 </tr>
                                                 } @empty {
                                                 <tr>
-                                                    <td colspan="7" class="text-center">No restaurants found</td>
+                                                    <td colspan="10" class="text-center">No restaurants found</td>
                                                 </tr>
                                                 }
                                             </tbody>
                                         </table>
                                     </div>
+                                    }
                                 </div>
                             </div>
                         </div>

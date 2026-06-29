@@ -2,40 +2,42 @@ import { AfterViewInit, ChangeDetectorRef, Component, inject } from '@angular/co
 import { DalePuesAdminDataService } from '../../core/services/dale-pues-admin-data.service';
 import { ScriptLoaderService } from '../../core/services/script-loader.service';
 import { FooterComponent } from '../../layout/footer/footer';
-import { DalePuesUser } from '../../models/auth.models';
+import { DalePuesPromotion } from '../../models/dale-pues.models';
 
 @Component({
-  selector: 'app-users-page',
+  selector: 'app-promotions-page',
   imports: [FooterComponent],
-  templateUrl: './users.html',
+  templateUrl: './promotions.html',
   styles: [':host { display: contents; }']
 })
-export class UsersPageComponent implements AfterViewInit {
+export class PromotionsPageComponent implements AfterViewInit {
   private readonly adminData = inject(DalePuesAdminDataService);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly scripts = inject(ScriptLoaderService);
-  users: DalePuesUser[] = [];
+  promotions: DalePuesPromotion[] = [];
   loading = false;
   error = '';
 
   async ngAfterViewInit(): Promise<void> {
-    await this.loadUsers();
-    await this.scripts.loadTemplateScripts(this.scripts.usersPageScripts);
+    await this.loadPromotions();
+    await this.scripts.loadTemplateScripts(this.scripts.productsPageScripts);
   }
 
-  formatIndex(index: number): string {
-    return `${index + 1}`.padStart(2, '0');
+  formatDiscount(promotion: DalePuesPromotion): string {
+    if (promotion.discountType === 'percentage') return `${promotion.discountValue || 0}%`;
+    if (promotion.discountType === 'fixed') return `${promotion.discountValue || 0}`;
+    return promotion.badgeText || promotion.discountType;
   }
 
-  private async loadUsers(): Promise<void> {
+  private async loadPromotions(): Promise<void> {
     this.loading = true;
     this.error = '';
     this.cdr.detectChanges();
 
     try {
-      this.users = await this.adminData.getUsers();
+      this.promotions = await this.adminData.getPromotions();
     } catch (error) {
-      this.users = [];
+      this.promotions = [];
       this.error = this.parseError(error);
     } finally {
       this.loading = false;
@@ -44,6 +46,6 @@ export class UsersPageComponent implements AfterViewInit {
   }
 
   private parseError(error: unknown): string {
-    return error instanceof Error ? error.message : 'No fue posible cargar usuarios.';
+    return error instanceof Error ? error.message : 'No fue posible cargar promociones.';
   }
 }

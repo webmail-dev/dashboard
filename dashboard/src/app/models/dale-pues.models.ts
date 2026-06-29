@@ -48,6 +48,7 @@ export interface DalePuesBusiness {
   active?: boolean;
   featured?: boolean;
   owner?: string;
+  ownerName?: string;
   created?: string;
   updated?: string;
 }
@@ -62,7 +63,9 @@ export type DalePuesBusinessPayload = Partial<
 export interface DalePuesProduct {
   id: string;
   business?: string;
+  businessName?: string;
   category?: string;
+  categoryName?: string;
   name: string;
   slug: string;
   description?: string;
@@ -116,7 +119,9 @@ export interface DalePuesPromotion {
   title: string;
   description?: string;
   business?: string;
+  businessName?: string;
   product?: string;
+  productName?: string;
   section: ContentSection;
   discountType: DiscountType;
   discountValue?: number;
@@ -144,4 +149,6 @@ export interface DashboardStats {
   users: number;
   couriers: number;
   pendingUsers: number;
+  banners: number;
+  promotions: number;
 }

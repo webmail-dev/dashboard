@@ -31,7 +31,9 @@ export class ProductsService extends DalePuesCrudService<DalePuesProduct, DalePu
     return {
       id: record.id,
       business: record['business'],
+      businessName: this.getExpandedText(record, 'business'),
       category: record['category'],
+      categoryName: this.getExpandedText(record, 'category'),
       name: record['name'],
       slug: record['slug'],
       description: record['description'],

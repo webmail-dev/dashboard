@@ -1,12 +1,11 @@
 <div class="page-body">
-                <!-- Drivers Table Start -->
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card card-table">
                                 <div class="card-body">
                                     <div class="title-header option-title">
-                                        <h5>Drivers</h5>
+                                        <h5>Businesses</h5>
                                         <form class="d-inline-flex">
                                             <a href="javascript:void(0)" class="align-items-center btn btn-theme d-flex">
                                                 <i data-feather="plus-square"></i>Add New
@@ -15,63 +14,58 @@
                                     </div>
 
                                     @if (loading) {
-                                    <div class="py-4 text-center">Loading drivers...</div>
+                                    <div class="py-4 text-center">Loading businesses...</div>
                                     } @else if (error) {
                                     <div class="alert alert-danger mb-0">{{ error }}</div>
                                     } @else {
-                                    <div class="table-responsive theme-scrollbar table-product">
-                                        <table class="table category-table dataTable no-footer" id="table_id">
+                                    <div class="table-responsive category-table theme-scrollbar">
+                                        <table class="table all-package theme-table" id="table_id">
                                             <thead>
                                                 <tr>
-                                                    <th>No.</th>
-                                                    <th>Driver</th>
+                                                    <th>Logo</th>
                                                     <th>Name</th>
+                                                    <th>Slug</th>
+                                                    <th>Type</th>
+                                                    <th>Owner</th>
                                                     <th>Phone</th>
-                                                    <th>Document</th>
-                                                    <th>Vehicle</th>
-                                                    <th>Address</th>
+                                                    <th>City</th>
+                                                    <th>Rating</th>
+                                                    <th>Featured</th>
                                                     <th>Status</th>
                                                     <th>Option</th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
-                                                @for (driver of drivers; track driver.id; let index = $index) {
+                                                @for (business of businesses; track business.id) {
                                                 <tr>
-                                                    <td class="f-w-600">{{ formatIndex(index) }}.</td>
                                                     <td>
                                                         <div class="table-image">
-                                                            <img [src]="driver.avatar || 'assets/dashboard/images/users/1.jpg'" class="img-fluid rounded" [alt]="driver.name || driver.email || 'driver'">
+                                                            <img [src]="business.logo || business.cover || 'assets/dashboard/images/product/1.png'" class="img-fluid" [alt]="business.name">
                                                         </div>
                                                     </td>
-                                                    <td>
-                                                        <div class="user-name">
-                                                            <span>{{ driver.name || 'Sin nombre' }}</span>
-                                                            <span>{{ driver.email || '-' }}</span>
-                                                        </div>
-                                                    </td>
-                                                    <td>{{ driver.phone || '-' }}</td>
-                                                    <td>{{ driver.identityDocument || '-' }}</td>
-                                                    <td class="f-w-600">{{ driver.vehicleType || '-' }}</td>
-                                                    <td>{{ driver.address || driver.city || '-' }}</td>
-                                                    <td class="status-close">
-                                                        <span>{{ driver.status || 'active' }}</span>
+                                                    <td>{{ business.name }}</td>
+                                                    <td>{{ business.slug }}</td>
+                                                    <td>{{ business.type }}</td>
+                                                    <td>{{ business.ownerName || business.owner || '-' }}</td>
+                                                    <td>{{ business.phone || business.whatsapp || '-' }}</td>
+                                                    <td>{{ business.city || business.address || '-' }}</td>
+                                                    <td class="td-price">{{ formatRating(business) }}</td>
+                                                    <td>{{ business.featured ? 'Yes' : 'No' }}</td>
+                                                    <td [class]="business.active ? 'status-close' : 'status-danger'">
+                                                        <span>{{ business.active ? 'Active' : 'Inactive' }}</span>
                                                     </td>
                                                     <td>
                                                         <ul>
                                                             <li><a href="javascript:void(0)"><i class="ri-eye-line"></i></a></li>
                                                             <li><a href="javascript:void(0)"><i class="ri-pencil-line"></i></a></li>
-                                                            <li>
-                                                                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
-                                                                    <i class="ri-delete-bin-line"></i>
-                                                                </a>
-                                                            </li>
+                                                            <li><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModalToggle"><i class="ri-delete-bin-line"></i></a></li>
                                                         </ul>
                                                     </td>
                                                 </tr>
                                                 } @empty {
                                                 <tr>
-                                                    <td colspan="9" class="text-center">No drivers found</td>
+                                                    <td colspan="11" class="text-center">No businesses found</td>
                                                 </tr>
                                                 }
                                             </tbody>
@@ -83,7 +77,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Drivers Table Ends-->
 
               <app-footer />
 </div>

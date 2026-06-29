@@ -14,6 +14,11 @@
                                             </a>
                                         </form>
                                     </div>
+                                    @if (loading) {
+                                    <div class="py-4 text-center">Loading categories...</div>
+                                    } @else if (error) {
+                                    <div class="alert alert-danger mb-0">{{ error }}</div>
+                                    } @else {
                                     <div class="table-responsive theme-scrollbar">
                                         <div>
                                             <table class="table category-table" id="table_id">
@@ -21,10 +26,13 @@
                                                     <tr>
                                                         <th><input id="checkall" class="custom-checkbox" type="checkbox" name="text">
                                                         </th>
-                                                        <th>Product Image</th>
-                                                        <th>Product Name</th>
-                                                        <th>Date</th>
-                                                        <th>Foods</th>
+                                                        <th>Image</th>
+                                                        <th>Name</th>
+                                                        <th>Slug</th>
+                                                        <th>Section</th>
+                                                        <th>Order</th>
+                                                        <th>Status</th>
+                                                        <th>Created</th>
                                                         <th>Option</th>
                                                     </tr>
                                                 </thead>
@@ -39,8 +47,13 @@
                                                             </div>
                                                         </td>
                                                         <td>{{ category.name }}</td>
-                                                        <td>{{ category.created | date: 'dd-MM-yyyy' }}</td>
+                                                        <td>{{ category.slug }}</td>
                                                         <td>{{ category.type }}</td>
+                                                        <td>{{ category.order || 0 }}</td>
+                                                        <td [class]="category.active ? 'status-close' : 'status-danger'">
+                                                            <span>{{ category.active ? 'Active' : 'Inactive' }}</span>
+                                                        </td>
+                                                        <td>{{ category.created | date: 'dd-MM-yyyy' }}</td>
                                                         <td>
                                                             <ul class="d-flex align-items-center  justify-content-center">
                                                                 <li><a href="javascript:void(0)"><i class="ri-eye-line"></i></a></li>
@@ -55,13 +68,14 @@
                                                     </tr>
                                                     } @empty {
                                                     <tr>
-                                                        <td colspan="6" class="text-center">No categories found</td>
+                                                        <td colspan="9" class="text-center">No categories found</td>
                                                     </tr>
                                                     }
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -72,4 +86,3 @@
                 
               <app-footer />
 </div>
-
